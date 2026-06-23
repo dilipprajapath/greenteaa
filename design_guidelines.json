@@ -1,0 +1,98 @@
+{
+  "theme": "Light",
+  "archetype": "Organic & Earthy",
+  "brand_name": "Green Tara Wellness",
+  "colors": {
+    "background": "#FAF7F2",
+    "surface": "#FFFFFF",
+    "primary": "#1C3F35",
+    "secondary": "#D4AF37",
+    "tertiary": "#8EAC9A",
+    "text_main": "#1C3F35",
+    "text_muted": "#4A554D",
+    "border": "rgba(28, 63, 53, 0.1)",
+    "footer_bg": "#1C3F35",
+    "footer_text": "#FAF7F2"
+  },
+  "typography": {
+    "font_families": {
+      "heading": "Cormorant Garamond",
+      "body": "Outfit"
+    },
+    "scales": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-light tracking-tighter text-[#1C3F35]",
+      "h2": "text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-[#1C3F35]",
+      "h3": "text-xl md:text-2xl font-normal text-[#1C3F35]",
+      "body": "text-base md:text-lg leading-relaxed text-[#4A554D]",
+      "overline": "text-xs md:text-sm tracking-[0.2em] uppercase text-[#D4AF37] font-semibold"
+    }
+  },
+  "spacing_and_layout": {
+    "section_padding": "py-20 md:py-32",
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "grid_gap": "gap-8 md:gap-12",
+    "border_radius": {
+      "card": "rounded-2xl",
+      "button": "rounded-full",
+      "image": "rounded-3xl"
+    }
+  },
+  "components": {
+    "button_primary": "inline-flex items-center justify-center bg-[#1C3F35] text-[#FAF7F2] px-8 py-4 rounded-full hover:bg-[#142D26] transition-all duration-300 font-medium tracking-wide",
+    "button_secondary": "inline-flex items-center justify-center border border-[#1C3F35]/30 text-[#1C3F35] px-8 py-4 rounded-full hover:bg-[#1C3F35] hover:text-[#FAF7F2] transition-all duration-300",
+    "card": "bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#1C3F35]/5 flex flex-col h-full",
+    "input_field": "w-full border-b border-[#1C3F35]/20 bg-transparent py-3 text-[#1C3F35] placeholder:text-[#1C3F35]/40 focus:border-[#1C3F35] focus:outline-none transition-colors rounded-none",
+    "glass_header": "fixed top-0 w-full z-50 backdrop-blur-xl bg-[#FAF7F2]/80 border-b border-[#1C3F35]/10"
+  },
+  "sections_direction": {
+    "header": {
+      "layout": "Sticky top, crystal glassmorphism effect. Flex container with space-between.",
+      "elements": "Left: Text Logo 'Green Tara' in Cormorant Garamond. Center: Desktop nav links (Services, About, FAQ). Right: 'Book Appointment' button.",
+      "behavior": "Transparent when at scroll 0, blurred when scrolling down."
+    },
+    "hero": {
+      "layout": "Min-h-[80vh] relative flex items-center justify-center text-center",
+      "elements": "Background image with bg-black/40 overlay for contrast. Content: Overline ('Green Tara Wellness'), H1 ('Where Healing Meets Tranquility'), Subtitle ('Rejuvenate Your Body, Refresh Your Mind'), Primary CTA.",
+      "alignment": "Center-aligned content to create a majestic, calming entrance."
+    },
+    "about": {
+      "layout": "Asymmetric 2-column grid. gap-12 md:gap-24 items-center.",
+      "elements": "Left: Large vertically oriented image with rounded-t-full or heavy border-radius. Right: Text block explaining the Green Tara story and philosophy. Soft Sage background section.",
+      "alignment": "Optical alignment, generous negative space."
+    },
+    "services_catalog": {
+      "layout": "CSS Grid (1 col mobile, 2 col tablet, 3 col desktop). gap-8.",
+      "elements": "Cards for each service (Facial Massage, Steam Bath, Couple Massage, etc.). Card contains: Image (h-48 object-cover), Title, short desc, 'Learn More' trigger opening Shadcn Dialog.",
+      "behavior": "Hover effects on cards (slight lift, image scale)."
+    },
+    "booking_system": {
+      "layout": "Multi-step form container centered in a max-w-3xl wrapper. Light shadow, white surface.",
+      "elements": "Step progress indicator (sticky top). Step 1: Service selection (Radio cards). Step 2: Duration selection (Pills). Step 3: Date (Shadcn Calendar) & Time (Scrollable grid). Step 4: Contact details. Final: Confirmation screen.",
+      "ux_patterns": "Inline validation, soft save states, prominent 'Next' and 'Back' buttons."
+    },
+    "testimonials": {
+      "layout": "Centered editorial layout. max-w-4xl mx-auto.",
+      "elements": "Large gold quotation marks. Serif quote text. Carousel mechanism (e.g., using framer-motion or simple state) for navigating reviews."
+    },
+    "faq": {
+      "layout": "max-w-3xl mx-auto.",
+      "elements": "Shadcn Accordion. Flush left, border-b only. Clean typography."
+    },
+    "footer": {
+      "layout": "Deep Forest Green bg. 3-column grid.",
+      "elements": "Col 1: Brand & Text. Col 2: Operating Hours & Contact (Click-to-call). Col 3: Google Maps embed (rounded-2xl)."
+    },
+    "floating_whatsapp": {
+      "layout": "Fixed bottom-6 right-6 z-50",
+      "elements": "Circular button with WhatsApp green (#25D366) or brand green. Lucide MessageCircle icon."
+    }
+  },
+  "media_urls": {
+    "hero": "https://images.pexels.com/photos/7598366/pexels-photo-7598366.jpeg",
+    "about": "https://images.pexels.com/photos/19666192/pexels-photo-19666192.jpeg",
+    "services_hot_stone": "https://images.unsplash.com/photo-1696841212541-449ca29397cc",
+    "services_massage": "https://images.pexels.com/photos/6188120/pexels-photo-6188120.jpeg",
+    "services_aromatherapy": "https://images.pexels.com/photos/6628606/pexels-photo-6628606.jpeg"
+  },
+  "testing_rules": "All interactive and key informational elements MUST include a data-testid attribute in kebab-case (e.g. data-testid='book-appointment-btn', data-testid='service-card-deep-tissue')."
+}

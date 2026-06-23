@@ -1,0 +1,46 @@
+{
+  "summary": "End-to-end test of Green Tara Wellness: backend (15 pytest cases) and frontend (landing, full 4-step booking, admin auth + dashboard). All flows working; minor non-blocking observations only.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "CORS middleware", "issue": "CORS_ORIGINS='*' is combined with allow_credentials=True. Per CORS spec, '*' cannot be used with credentials; browsers will block credentialed XHR if frontend is ever served from a different origin. Current preview works only because cookies are also being read via Bearer fallback. Recommend setting explicit allowed origins in backend/.env."},
+      {"endpoint": "POST /api/bookings", "issue": "Fully public with no rate-limit / captcha / honeypot. Spam risk in production."},
+      {"endpoint": "POST /api/auth/login", "issue": "No brute-force lockout / progressive delay (playbook recommends lockout after 5 failed attempts)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Hero section", "issue": "Navbar 'Home' link points to #home but Hero section has no id=\"home\" anchor; clicking Home does nothing. Add id=\"home\" to Hero <section>.", "selector": "#home (missing)", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_green_tara_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Add id=\"home\" to Hero section so the navbar 'Home' anchor scrolls correctly.",
+    "Replace CORS_ORIGINS='*' with explicit preview/production origins (required when allow_credentials=True).",
+    "Optional: add rate limit / brute-force lockout on /api/auth/login and basic anti-spam on /api/bookings."
+  ],
+  "critical_code_review_comments": [
+    "CORSMiddleware uses allow_origins='*' with allow_credentials=True — invalid per CORS spec; works here only because bearer token is also returned and used as fallback.",
+    "Hero is missing id='home' anchor referenced by navbar.",
+    "Booking endpoint validates duration as int but does not constrain to allowed values [30,60,90,120] — invalid values would be accepted.",
+    "No /api/bookings/{id} GET endpoint for fetching a single booking (acceptable for current scope).",
+    "seed_admin correctly updates the hash when ADMIN_PASSWORD changes (verified via login)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_green_tara_api.py (new)",
+    "/app/backend/tests/__init__.py (new, empty)"
+  ],
+  "success_rate": {"backend": "100% (15/15)", "frontend": "100% on tested flows"},
+  "test_credentials": "Admin: Prajapathdilip098@gmail.com / GreenTara@2026 (from /app/memory/test_credentials.md). Verified working.",
+  "seed_data_creation": "Two TEST bookings created via API and UI during run: refs GTW-260623-AD521 (pytest, set to confirmed), GTW-260623-AD523 (UI flow, then set to confirmed via admin). Plus one earlier booking 827F9. These remain in DB.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend pytest file at /app/backend/tests/test_green_tara_api.py — re-run with `REACT_APP_BACKEND_URL=https://rejuvenate-spa-4.preview.emergentagent.com python -m pytest backend/tests/ -v`. All admin endpoints require Bearer token OR httpOnly cookie set via /api/auth/login. Booking reference format confirmed: GTW-YYMMDD-XXXXX (5 uppercase alnum). Hero missing #home anchor is the only frontend defect observed.",
+  "playwright_observations": {
+    "landing_sections": "about, services, gallery, booking, testimonials, faq all present. #home anchor missing.",
+    "booking_flow": "All 4 steps work; submit-without-name/phone triggers correct toast; success shows reference.",
+    "admin": "Wrong password shows admin-login-error 'Invalid email or password'; correct login loads dashboard with stats (3 total, 2 pending, 1 confirmed); set-status-confirmed-<ref> updates badge; filter-pending narrows list; logout returns to /."
+  }
+}
